@@ -20,11 +20,11 @@ This C++ program is a Morse code translator that converts Morse code to text and
 
 
 ```
-`// Compile the code
+// Compile the code
 g++ morse_code_translator.cpp -o morse_code_translator
 
 // Run the program
-./morse_code_translator` 
+./morse_code_translator
 ```
 ## Methods
 
@@ -53,7 +53,7 @@ g++ morse_code_translator.cpp -o morse_code_translator
 
 ```cpp
 
-`#include <iostream>
+#include <iostream>
 #include <string>
 #include <map>
 #include <sstream>
