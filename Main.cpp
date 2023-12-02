@@ -3,12 +3,41 @@
 #include <map>
 
 class Translate {
+public:
 	Translate();
 	void PrintMorseCode();
+	std::string MorseToLetter(std::string Morse);
+	std::string LetterToMorse(std::string Letter);
 
 private:
 	std::map<std::string, std::string> MorseCode;
 };
+
+// Conversions
+std::string Translate::MorseToLetter(std::string Morse) {
+	for (auto i : MorseCode) {
+		if (i.second == Morse) {
+			return i.first;
+		}
+	}
+	return "Error";
+}
+
+std::string Translate::LetterToMorse(std::string Letter)
+{
+	if (MorseCode.find(Letter) == MorseCode.end()) {
+		return "Error";
+	}
+	else {
+		return MorseCode[Letter];
+	}
+}
+
+void Translate::PrintMorseCode() {
+	for (auto i : MorseCode) {
+		std::cout << i.first << " " << i.second << std::endl;
+	}
+}
 
 Translate::Translate() {
 	MorseCode["A"] = "._";
@@ -61,12 +90,13 @@ Translate::Translate() {
 	MorseCode["="] = "_..._";
 }
 
+
+
 int main()
 {
-
-	for (auto i : MorseCode) {
-		std::cout << i.first << " " << i.second << std::endl;
-	}
+	std::string Test = "._";
+	Translate newTranslation;
+	std::cout << newTranslation.MorseToLetter(Test);
 
 
 	return 0;
