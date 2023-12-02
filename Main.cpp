@@ -1,17 +1,38 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <sstream>
 
 class Translate {
 public:
 	Translate();
 	void PrintMorseCode();
-	std::string MorseToLetter(std::string Morse);
-	std::string LetterToMorse(std::string Letter);
+	void MorseToWord(std::string Morse);
 
 private:
+	std::string MorseToLetter(std::string Morse);
+	std::string LetterToMorse(std::string Letter);
 	std::map<std::string, std::string> MorseCode;
 };
+
+// Main Conversions
+void Translate::MorseToWord(std::string Morse) {
+	std::istringstream iss(Morse);
+	std::string ConvertedString;
+	std::string currentMorse;
+	while (iss >> currentMorse)
+	{
+		if (currentMorse == "/") {
+			std::cout << " ";
+			continue;
+		}
+		ConvertedString = MorseToLetter(currentMorse);
+		if (ConvertedString != "Error") {
+			std::cout << ConvertedString;
+		}
+	}
+}
+
 
 // Conversions
 std::string Translate::MorseToLetter(std::string Morse) {
@@ -40,63 +61,67 @@ void Translate::PrintMorseCode() {
 }
 
 Translate::Translate() {
-	MorseCode["A"] = "._";
-	MorseCode["B"] = "_...";
-	MorseCode["C"] = "_._.";
-	MorseCode["D"] = "_..";
+	MorseCode["A"] = ".-";
+	MorseCode["B"] = "-...";
+	MorseCode["C"] = "-.-.";
+	MorseCode["D"] = "-..";
 	MorseCode["E"] = ".";
-	MorseCode["F"] = ".._.";
-	MorseCode["G"] = "__.";
+	MorseCode["F"] = "..-.";
+	MorseCode["G"] = "--.";
 	MorseCode["H"] = "....";
 	MorseCode["I"] = "..";
-	MorseCode["J"] = ".___";
-	MorseCode["K"] = "_._";
-	MorseCode["L"] = "._..";
-	MorseCode["M"] = "__";
-	MorseCode["N"] = "_.";
-	MorseCode["O"] = "___";
-	MorseCode["P"] = ".__.";
-	MorseCode["Q"] = "__._";
-	MorseCode["R"] = "._.";
+	MorseCode["J"] = ".---";
+	MorseCode["K"] = "-.-";
+	MorseCode["L"] = ".-..";
+	MorseCode["M"] = "--";
+	MorseCode["N"] = "-.";
+	MorseCode["O"] = "---";
+	MorseCode["P"] = ".--.";
+	MorseCode["Q"] = "--.-";
+	MorseCode["R"] = ".-.";
 	MorseCode["S"] = "...";
-	MorseCode["T"] = "_";
-	MorseCode["U"] = ".._";
-	MorseCode["V"] = "..._";
-	MorseCode["W"] = ".__";
-	MorseCode["X"] = "_.._";
-	MorseCode["Y"] = "_.__";
-	MorseCode["Z"] = "__..";
+	MorseCode["T"] = "-";
+	MorseCode["U"] = "..-";
+	MorseCode["V"] = "...-";
+	MorseCode["W"] = ".--";
+	MorseCode["X"] = "-..-";
+	MorseCode["Y"] = "-.--";
+	MorseCode["Z"] = "--..";
 
-	MorseCode["1"] = ".____";
-	MorseCode["2"] = "..___";
-	MorseCode["3"] = "...__";
-	MorseCode["4"] = "...._";
+	MorseCode["1"] = ".----";
+	MorseCode["2"] = "..---";
+	MorseCode["3"] = "...--";
+	MorseCode["4"] = "....-";
 	MorseCode["5"] = ".....";
-	MorseCode["6"] = "_....";
-	MorseCode["7"] = "__...";
-	MorseCode["8"] = "___..";
-	MorseCode["9"] = "____.";
-	MorseCode["0"] = "_____";
+	MorseCode["6"] = "-....";
+	MorseCode["7"] = "--...";
+	MorseCode["8"] = "---..";
+	MorseCode["9"] = "----.";
+	MorseCode["0"] = "-----";
 
-	MorseCode["?"] = "..__..";
-	MorseCode["!"] = "_._.__";
-	MorseCode["."] = "._._._";
-	MorseCode[","] = "__..__";
-	MorseCode[";"] = "_._._.";
-	MorseCode[":"] = "___...";
-	MorseCode["+"] = "._._.";
-	MorseCode["-"] = "_...._";
-	MorseCode["/"] = "_.._.";
-	MorseCode["="] = "_..._";
+	MorseCode["?"] = "..--..";
+	MorseCode["!"] = "-.-.--";
+	MorseCode["."] = ".-.-.-";
+	MorseCode[","] = "--..--";
+	MorseCode[";"] = "-.-.-.";
+	MorseCode[":"] = "---...";
+	MorseCode["+"] = ".-.-.";
+	MorseCode["-"] = "-....-";
+	MorseCode["/"] = "-..-.";
+	MorseCode["="] = "-...-";
 }
 
 
 
 int main()
 {
-	std::string Test = "._";
+	std::cout << "Morse Code Translator. \n'-' = dash, '.' = dot, '/' = space \nPlease input your morse code: " << std::endl;
+	std::string Morse;
+	getline(std::cin, Morse);
 	Translate newTranslation;
-	std::cout << newTranslation.MorseToLetter(Test);
+
+	std::cout << "Transated Text: ";
+	newTranslation.MorseToWord(Morse);
 
 
 	return 0;
